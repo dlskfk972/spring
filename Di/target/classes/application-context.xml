@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"  
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans  
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="nice" class="day01.ex01.Spring"/>
+<!-- 생성자 주입 -->
+<bean id="chef" class="day01.ex02.construct.Chef"></bean>
+<bean id="hotel" class="day01.ex02.construct.Hotel">
+<constructor-arg ref="chef"/> 
+</bean>
+
+<bean id="res" class="day01.ex02.construct.ResTaurant">
+<constructor-arg ref="chef"/> 
+</bean>
+
+<!-- setter주입 -->
+<bean id="DBDev" class="day01.ex03.setter.DatabaseDev">
+<property name="url" value="jdbc:mysql://localhost:3306/test"/>
+<property name="uid" value="spring"/>
+<property name="upw" value="spring"/>
+</bean>
+
+<bean id="DBDev2" class="day01.ex03.setter.DatabaseDev">
+<property name="url" value="jdbc:mysql://118.130.22.132:3306/dev"/>
+<property name="uid" value="auth01"/>
+<property name="upw" value="1234"/>
+</bean>
+
+<!-- setter주입-빈 주입 -->
+<bean id="ds" class="day01.ex03.setter.MemberDAO">
+<property name="ds" ref="DBDev"/>
+</bean>
+
+
+
+</beans>

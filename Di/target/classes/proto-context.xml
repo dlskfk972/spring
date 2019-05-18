@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"  
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans  
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- 기본적으로 스프링 컨테이너의 bean 싱글톤의 형식이지만,
+scope속성에 prototype을 써주면 사용될때마다 다른 객체가 생성됩니다. -->
+<bean id="person" class="day01.ex04.prototype.Person" scope="prototype">
+<property name="name" value="홍길자"/>
+<property name="age" value="20"/>
+</bean>
+</beans>
