@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- 1. xml파일을 mapper로 사용하는 선언 -->
+  
+  <!-- 2. namespace 경로에 mybatis 설정 인터페이스의 경로를 작성 -->
+  <mapper namespace="com.zerock.mapper.ScoreMapper">
+  
+  <!-- 3.id속성에 해당 인터페이스의 실행시킬 추상메서드 작성 -->
+  <!-- 4.#{이름} 안에는 전달받은 VO객체의 맵핑시켜줄 멤버변수명을 작성-->
+  <!-- 5.스프링 설정파일에 mybatis 매퍼스캔 추가 -->
+  <!-- 6.service계층에서 연결 -->
+  <!-- <insert id="scoreInsert">
+     insert into score01()(name,kor,eng,math)values(#{name},#{kor},#{eng},#{math})
+  </insert> -->
+  
+  <insert id="scoreInsert">
+  insert into score01(name,kor,eng,math)values(#{p1},#{p2},#{p3},#{p4})
+  </insert>
+  
+  
+  <!-- resultType속성의 값은 select의 결과를 지정한 객체로 만들어서 자동 맵핑후 반환합니다 -->
+  <!-- 해당 VO에 기술된 멤버변수(setter)는 DB컬럼명과 동일해야 한다. -->
+  <select id="scoreSelect" resultType="com.zerock.command.ScoreVO">
+  select *from score01
+  </select>
+  
+  <delete id="scoreDelete" >
+  delete from score01 where num=#{num }
+ 
+  </delete>
+  
+  </mapper>

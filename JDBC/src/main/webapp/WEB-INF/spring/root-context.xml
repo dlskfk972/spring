@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+<!--DB관련된 spring설정 파일 -->
+
+<!-- 커넥션풀을 bean으로 등록 -->
+<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/spring?serverTimezone=Asia/Seoul"/>
+<property name="username" value="spring"/>
+<property name="password" value="spring"/>
+
+<property name="maximumPoolSize" value="10"/>
+</bean>
+
+<bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
+<constructor-arg ref="hikariConfig"/>
+</bean>
+
+<!-- jdbctemplate클래스를 bean 생성하며, ds소스 의존 주입 -->
+<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+<property name="dataSource" ref="ds"/>
+
+</bean>
+		
+<!-- mybatis 핵심객체 sessionFactory클래스를 빈으로 생성 -->		
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+<property name="dataSource" ref="ds"/>
+
+</bean>
+
+<mybatis-spring:scan base-package="com.zerock.mapper"/>
+<!-- mybatis xml파일 스캔 명령 -->
+<mybatis-spring:scan base-package="com.zerock.testmapper"/>
+</beans>
